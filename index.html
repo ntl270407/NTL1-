@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi cậu một điều bất ngờ</title>
+    <style>
+        /* Toàn bộ nền đen */
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+        }
+
+        /* Phần nội dung chữ trắng, viền hồng phát sáng */
+        .card {
+            z-index: 10;
+            text-align: center;
+            padding: 30px;
+            border: 3px solid #ff1493; /* Màu hồng DeepPink */
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 20px #ff1493, inset 0 0 20px #ff1493; /* Hiệu ứng viền phát sáng */
+            max-width: 80%;
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 22px;
+            line-height: 1.6;
+            margin: 0;
+            text-shadow: 0 0 10px #fff, 0 0 20px #ff69b4; /* Chữ phát sáng */
+        }
+
+        /* Nút bấm */
+        .btn-group {
+            margin-top: 30px;
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            position: relative;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #accept {
+            background-color: #ff1493;
+            color: white;
+            box-shadow: 0 0 15px #ff1493;
+        }
+
+        #decline {
+            background-color: #444;
+            color: #bbb;
+            position: absolute; /* Quan trọng để di chuyển tự do */
+            left: 160px; /* Vị trí mặc định cạnh nút đồng ý */
+        }
+
+        /* Hiệu ứng trái tim bay */
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: 12px;
+            opacity: 0.6;
+            pointer-events: none;
+            animation: move linear infinite;
+        }
+
+        @keyframes move {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>hôm nay tớ rất vui vì cậu đã cho tớ 1 buổi date đầu tiên hạnh phúc. <br><br>
+            Vậy nên bill hôm nay tớ sẽ share cho cậu là 0k và thêm 1 và nhiều buổi date với tớ nữa.</h2>
+        
+        <div class="btn-group">
+            <button id="accept" onclick="agreed()">Đồng ý ❤️</button>
+            <button id="decline" onmouseover="runAway()">Từ chối</button>
+        </div>
+    </div>
+
+    <script>
+        // Hàm xử lý nút từ chối chạy trốn
+        function runAway() {
+            const btn = document.getElementById('decline');
+            // Tính toán vị trí ngẫu nhiên trong màn hình
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        // Hiệu ứng khi bấm Đồng ý
+        function agreed() {
+            alert("Tớ biết là cậu không thể từ chối mà! Chốt kèo nhé 🥰");
+            // Bạn có thể đổi hướng sang Facebook hoặc Zalo của bạn tại đây:
+            // window.location.href = "https://facebook.com/your-id";
+        }
+
+        // Tạo trái tim nhỏ bay lung tung trên nền đen
+        function createHearts() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤'; 
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+        setInterval(createHearts, 150); // Cứ 150ms tạo 1 trái tim
+    </script>
+</body>
+</html>
